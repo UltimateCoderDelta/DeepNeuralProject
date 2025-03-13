@@ -1,0 +1,100 @@
+{% extends "deepneural/base.html" %}
+{% load static %}
+
+{% block head %}
+    <title>DeepNeural</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" >
+    <link type="text/css" href="{% static 'deepneural/styles.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kadwa:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<span class="nav-item title"><a href="{% url 'home' %}">DeepNeural</a></span>
+<span class="nav-item"><a href="{% url 'predictive_models' %}">Predictive Models</a></span>
+<!-- <span class="nav-item"><a href="#">Analytics</a></span> -->
+<span class="nav-item"><a href="#">Blog</a></span>
+{% endblock %}
+
+{% block content %}
+  <main class="pneumonia_content">
+    <h1>Pneumonia Health Classifier</h1>
+    <section>
+      <section class="form_card">
+          <p>Model Description: DeepNeural's Pneumonia classifier is
+          designed to predict the outcome of a patient having lung 
+          problems. The outcome is represented as a percentage of confidence, 
+          relative to the prediction.</p>
+          <p>
+          Model Outcome: The model has two classes: PNEUMONIA and NORMAL. 
+          </p>
+          <p>
+          Warning: This model is meant to act as an assistive tool, not for the direct
+                   diagnosis of patients.
+          </p>
+      </section>
+    </section>
+    <section class="imageResult">
+      <img id="preview" alt="Image preview" class="hide_images">
+    </section>
+    <section class="pneumonia">
+      <label for="image_uploader">Select a CT Scan: </b></label>
+      <input type="file" id="image_uploader"
+       name="image_uploader", accept="image/png, image/jpeg">
+      <button id="imagebtn" class="submit_button">Predict Result</button>
+    </section>
+  </main>
+  <script>
+    //Add an event listener to the predict button. The button must
+   //check whether there is a value from the file input field. If
+   //there is, the fetch API would be called to predict the result 
+  //of the image. For now, simply reveal the image on the page as a
+   //temporary element. 
+   
+   const fileInput = document.getElementById("image_uploader");
+   const button = document.getElementById("imagebtn");
+   const imageResult = document.querySelector(".imageResult");
+
+   button.addEventListener("click", displayImage);
+
+   fileInput.addEventListener("change", handleFileSelection);
+
+   function handleFileSelection(event){
+      const file = event.target.files[0];
+      let warningMessage = document.createElement("p");
+ 
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+        const imgDiv = document.getElementById("preview");
+        imgDiv.src = e.target.result;
+        imgDiv.classList.remove("hide_images");
+        imgDiv.classList.add("show_images");
+        };
+       reader.readAsDataURL(file);
+      } 
+   }
+
+   function displayImage(imgData){
+     if(fileInput.value.length == 0) {
+       console.log("No files selected!");
+       let warningMessage = document.createElement("p");
+       warningMessage.textContent = "Please select a CT Scan";
+       imageResult.appendChild(warningMessage);
+     }
+     else {
+      console.log(fileInput.value);
+      let showImage = document.createElement("div");
+      let img = document.createElement("img");
+      img.src = fileInput.value;
+      showImage.classList.add("images");
+     }
+   }
+
+   
+  </script>
+  <!-- <script src="{% static 'deepneural/script.js' %}"></script> -->
+{% endblock %}

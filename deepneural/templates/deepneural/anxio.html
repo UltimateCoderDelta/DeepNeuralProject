@@ -1,0 +1,49 @@
+{% extends "deepneural/base.html" %}
+{% load static %}
+
+{% block head %}
+<title>DeepNeural</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" >
+<link href="{% static 'deepneural/styles.css' %}" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kadwa:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+   <h1>DeepNeural</h1>
+      <span class="nav-item"><a href="#">Anxio</a></span>
+      <span class="nav-item"><a href="#">API</a></span>
+      <span class="nav-item"><a href="#">Login</a></span>
+      <span id="sign-up" class="nav-item"><a href="#">Sign up</a></span>
+{% endblock %}
+
+{% block content %}
+  <main>
+    <section class="center_chat_seg">
+      <h1>What can I help you with?</h1>
+      <article>
+        <p>Summarize text</p>
+      </article>
+      <article>
+        <p>Visualize data</p>
+      </article>
+      <article>
+        <p>Predict patient health</p>
+      </article>
+      <article>
+        <p>Food & Nutrition</p>
+      </article>
+    </section>
+  </main>
+{% endblock %}
+{% block footer %}
+ <section class="textbox">
+    <form  action="" method="POST">
+      <textarea type="text" name="chatbot">
+        Chat with Anxio
+      </textarea>
+    </form>
+ </section>
+{% endblock %}

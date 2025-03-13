@@ -1,0 +1,11 @@
+.pneumonia_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pneumonia_content h1 {
+    color:#FFF;
+    font-family: "Poppins", serif;
+}
